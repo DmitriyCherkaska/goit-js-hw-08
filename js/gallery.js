@@ -64,9 +64,9 @@ const images = [
   },
 ];
 
-const galleryContainer = document.querySelector('.gallery');
+const galleryCont = document.querySelector('.gallery');
 
-function createGalleryMarkup(images) {
+function createMarkupGallery(images) {
   return images
     .map(
       ({ preview, original, description }) => `
@@ -85,7 +85,7 @@ function createGalleryMarkup(images) {
     .join('');
 }
 
-function onGalleryContainerClick(evt) {
+function onContainerClick(evt) {
   if (!evt.target.classList.contains('gallery-image')) return;
 
   evt.preventDefault();
@@ -98,9 +98,9 @@ function onGalleryContainerClick(evt) {
   handleModalWindow(largeImageLink, alt);
 }
 
-function handleModalWindow(largeImageLink, alt) {
+function handleModalWindow(imageLargeLink, alt) {
   const modal = basicLightbox.create(
-    `<img src="${largeImageLink}" alt="${alt}" width="1112" height="640">`,
+    `<img src="${imageLargeLink}" alt="${alt}" width="1112" height="640">`,
     {
       onShow: () => document.addEventListener('keydown', pressEscape),
       onClose: () => document.removeEventListener('keydown', pressEscape),
@@ -114,5 +114,5 @@ function handleModalWindow(largeImageLink, alt) {
   }
 }
 
-galleryContainer.insertAdjacentHTML('beforeend', createGalleryMarkup(images));
-galleryContainer.addEventListener('click', onGalleryContainerClick);
+galleryCont.insertAdjacentHTML('beforeend', createMarkupGallery(images));
+galleryCont.addEventListener('click', onContainerClick);
